@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>OPA Wasm browser demo</title>
+    <script type="module">
+      import opa from 'https://unpkg.com/@open-policy-agent/opa-wasm@latest/dist/opa-wasm-browser.esm.js';
+      fetch('policy.wasm').then(response =>
+        response.arrayBuffer()
+      ).then(bytes =>
+        opa.loadPolicy(bytes)
+      ).then(
+        policy => console.info(policy.evaluate({foo: "bar"})),
+        error => console.error(error)
+      );
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
