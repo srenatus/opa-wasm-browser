@@ -1,5 +1,5 @@
 package test
 
 p {
-    input.foo == "bar"
+    input.fragment == "moo"
 }

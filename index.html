@@ -6,12 +6,21 @@
     <title>OPA Wasm browser demo</title>
     <script type="module">
       import opa from 'https://unpkg.com/@open-policy-agent/opa-wasm@latest/dist/opa-wasm-browser.esm.js';
+      const hash = window.location.hash.substring(1);
       fetch('policy.wasm').then(response =>
         response.arrayBuffer()
       ).then(bytes =>
         opa.loadPolicy(bytes)
       ).then(
-        policy => console.info(policy.evaluate({foo: "bar"})),
+        policy => { 
+          const res = policy.evaluate({fragment: hash});
+          console.info(res);
+          if (res.length == 1 && res[0].result) {
+            document.body.style.backgroundColor = "green";
+          } else {
+            document.body.style.backgroundColor = "red";
+          }
+        },
         error => console.error(error)
       );
     </script>
