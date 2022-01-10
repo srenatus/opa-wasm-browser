@@ -27,4 +27,4 @@ jobs:
           make
           git add -f policy.wasm
           git commit -sm "policy.wasm: update" || exit 0
-          git push HEAD:gh-pages
+          git push origin HEAD:gh-pages
