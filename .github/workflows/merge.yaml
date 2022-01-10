@@ -25,6 +25,6 @@ jobs:
               exit 0
           fi
           make
-          git add .
-          git commit -sm "policy.wasm: update"
+          git add -f policy.wasm
+          git commit -sm "policy.wasm: update" || exit 0
           git push HEAD:gh-pages
