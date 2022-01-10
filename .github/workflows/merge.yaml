@@ -7,7 +7,7 @@ on:
 
 jobs:
   generate:
-    name: Sync to gh-pages
+    name: Sync code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,5 +26,5 @@ jobs:
           fi
           make
           git add -f policy.wasm
-          git commit -sm "policy.wasm: update" || exit 0
-          git push origin HEAD:gh-pages
+          git commit -sm "policy.wasm: update" || true
+          git push origin HEAD:main
