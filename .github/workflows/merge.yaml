@@ -1,0 +1,30 @@
+name: Post Merge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate:
+    name: Sync to gh-pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: infracost/setup-opa@v1
+      - name: Generate and push
+        shell: bash
+        run: |
+          # Commit any changes and push as needed.
+          # See https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
+          AUTHOR=gh-pages-updater
+          git config user.name ${AUTHOR}
+          git config user.email ${AUTHOR}@github.com
+          # Prevent looping
+          if [[ "$(git log -1 --pretty=format:'%an')" == "${AUTHOR}" ]]; then
+              exit 0
+          fi
+          make
+          git add .
+          git commit -sm "policy.wasm: update"
+          git push HEAD:gh-pages
