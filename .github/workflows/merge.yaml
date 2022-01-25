@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: infracost/setup-opa@v1
+      - uses: open-policy-agent/setup-opa@v1
       - name: Generate and push
         shell: bash
         run: |
